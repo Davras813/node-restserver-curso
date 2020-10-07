@@ -38,9 +38,9 @@ app.post('/usuario', function(req, res) {
 });
 
 app.put('/usuario/:id', function(req, res) {
-    let id = req.params.id;
+    let loqueescribioarriba = req.params.id;
     res.json({
-        id
+        loqueescribioarriba
     });
 });
 
