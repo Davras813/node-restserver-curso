@@ -82,6 +82,13 @@ app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) 
     Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
 
         if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            });
+        }
+
+        if (!categoriaDB) {
             return res.status(400).json({
                 ok: false,
                 err
@@ -109,7 +116,7 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, re
     Usuario.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, usuarioBorrado) => {
 
         if (err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: false,
                 err
             });
@@ -119,7 +126,7 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, re
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'Usuario no encontrado'
+                    message: 'El id no existe, usuario no encontrado'
                 }
             });
         }
